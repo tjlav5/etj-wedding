@@ -9,7 +9,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/flip-clock/flip-clock.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="count-down">
@@ -17,20 +16,66 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <style include="shared-styles">
       :host {
         display: block;
-
-        padding: 10px;
       }
     </style>
 
-    <flip-clock display-mode="countdown" start-from="20"></flip-clock>
+    <section>
+      <h4>[[days]]</h4>
+      <h5>Days</h5>
+    </section>
+    <section>
+      <h4>[[hours]]</h4>
+      <h5>Hours</h5>
+    </section>
+    <section>
+      <h4>[[minutes]]</h4>
+      <h5>Minutes</h5>
+    </section>
+    <section>
+      <h4>[[seconds]]</h4>
+      <h5>Seconds</h5>
+    </section>
   </template>
 
   <script>
+    const target = new moment('2017-07-23 17:30');
     Polymer({
       is: 'count-down',
-      ready: function () {
-        const clock = this.$$('flip-clock');
-        clock._startCount();
+      properties: {
+        days: {
+          type: Number
+        },
+        hours: {
+          type: Number
+        },
+        minutes: {
+          type: Number
+        },
+        seconds: {
+          type: Number
+        }
+      },
+      updateTimer: function() {
+        const now = new moment();
+        let dr = moment.range(now, target);
+
+        this.days = dr.diff('days');
+        now.add(this.days, 'days');
+        dr = moment.range(now, target);
+
+        this.hours = dr.diff('hours');
+        now.add(this.hours, 'hours');
+        dr = moment.range(now, target);
+
+        this.minutes = dr.diff('minutes');
+        now.add(this.minutes, 'minutes');
+        dr = moment.range(now, target);
+
+        this.seconds = dr.diff('seconds');
+      },
+      ready: function() {
+        this.updateTimer();
+        setInterval(this.updateTimer.bind(this), 1000);
       }
     });
   </script>
