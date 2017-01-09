@@ -20,7 +20,9 @@
     "paper-card": "PolymerElements/paper-card#^1.1.4",
     "google-map": "GoogleWebComponents/google-map#^1.1.14",
     "iron-scroll-spy": "Zecat/iron-scroll-spy#^2.1.0",
-    "moment-range": "^2.2.0"
+    "moment-range": "^2.2.0",
+    "paper-dialog": "PolymerElements/paper-dialog#^1.1.0",
+    "iron-icons": "PolymerElements/iron-icons#^1.2.0"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"

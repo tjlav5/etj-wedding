@@ -17,9 +17,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../bower_components/app-route/app-location.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-scroll-spy/iron-auto-scroll-spy.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../bower_components/neon-animation/animations/fade-out-animation.html">
+<link rel="import" href="../bower_components/neon-animation/animations/fade-in-animation.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="bride-and-groom.html">
 <link rel="import" href="count-down.html">
@@ -44,6 +48,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         --paper-icon-button-ink-color: white;
       }
 
+      .nav-dialog {
+        position: fixed;
+        top: 16px;
+        right: 16px;
+        width: 300px;
+        height: 300px;
+        overflow: auto;
+      }
+
     </style>
 
     <app-location route="{{route}}"></app-location>
@@ -52,17 +65,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         pattern="/:page"
         data="{{routeData}}"
         tail="{{subroute}}"></app-route>
-
-    <app-drawer-layout fullbleed>
-      <!-- Drawer content -->
-      <app-drawer id="drawer" align="end">
-      
-        <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="view1" href="/view1">View One</a>
-          <a name="view2" href="/view2">View Two</a>
-          <a name="view3" href="/view3">View Three</a>
-        </iron-selector>
-      </app-drawer>
 
       <!-- Main content -->
       <app-header-layout>
@@ -74,7 +76,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
           <app-toolbar>
             <h4 condensed-title>#ETJ</h4>
-            <paper-icon-button icon="app:menu" drawer-toggle></paper-icon-button>
+            <paper-icon-button icon="icons:menu" on-click="openNav"></paper-icon-button>
           </app-toolbar>
 
           <app-toolbar></app-toolbar>
@@ -93,12 +95,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </iron-auto-scroll-spy>
 
       </app-header-layout>
-    </app-drawer-layout>
+      <paper-dialog id="nav" class="nav-dialog" entry-animation="fade-in-animation" exit-animation="fade-out-animation" with-backdrop>
+        <h2>Custom Size &amp; Position</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+          dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </paper-dialog>
   </template>
 
   <script>
     Polymer({
       is: 'my-app',
+      openNav: function() {
+        this.$.nav.open();
+      }
     });
   </script>
 </dom-module>
