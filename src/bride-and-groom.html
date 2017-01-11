@@ -27,6 +27,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         list-style: none;
       }
 
+      paper-card {
+        --paper-card: {
+          box-shadow: none !important;
+        }
+      }
+
       @media (max-width: 799px) {
         :host {
           --app-grid-columns: 1;
@@ -38,7 +44,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <ul class="app-grid">
       <li class="item">
-        <paper-card heading="Erika">
+        <paper-card heading="Erika" image="images/img-erika.jpg">
           <div class="card-content">Hey hey hey!</div>
           <div class="card-actions">
             <paper-button>TODO: arrow icon</paper-button>
@@ -46,7 +52,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </paper-card>
       </li>
       <li class="item">
-        <paper-card heading="TJ">
+        <paper-card heading="TJ" image="images/img-tj.jpg">
           <div class="card-content">Hey hey hey!</div>
           <div class="card-actions">
             <paper-button>TODO: arrow icon</paper-button>
