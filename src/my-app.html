@@ -12,7 +12,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
-<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../bower_components/app-route/app-location.html">
@@ -41,15 +40,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       app-header {
+        @apply(--layout-fixed-top);
         color: #fff;
         background-color: var(--app-primary-color);
-        --app-header-background-front-layer: {
-          background-image: url(/images/etj-logo.svg);
-          background-position: 50% 20%;
+        z-index: 10;
+        --app-header-background-rear-layer: {
+          background-color: #ef6c00;
         }
-      }
-      app-header paper-icon-button {
-        --paper-icon-button-ink-color: white;
       }
 
       .nav-dialog {
@@ -59,6 +56,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         width: 300px;
         height: 300px;
         overflow: auto;
+      }
+
+      video {
+        width: 100%;
       }
 
     </style>
@@ -71,34 +72,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         tail="{{subroute}}"></app-route>
 
       <!-- Main content -->
-      <app-header-layout>
-
-        <app-header
-            condenses
-            fixed
-            effects="material">
-
+        <app-header fixed>
           <app-toolbar>
-            <h4 condensed-title>#ETJ</h4>
+            <h4 main-title>#ETJ</h4>
             <paper-icon-button icon="icons:menu" on-click="openNav"></paper-icon-button>
           </app-toolbar>
-
-          <app-toolbar></app-toolbar>
-          <app-toolbar></app-toolbar>
-
-          <app-toolbar>
-            <h1 main-title spacer>#ETJ</h1>
-          </app-toolbar>
-
         </app-header>
 
         <iron-auto-scroll-spy selected="{{scrollSelected}}" id="autoScrollSpy">
+          <video src="/images/Wedding-Video-2-bw.mp4" autostart autoplay loop="true" muted="true"></video>
           <count-down></count-down>
           <bride-and-groom></bride-and-groom>
           <map-accommodations></map-accommodations>
         </iron-auto-scroll-spy>
 
-      </app-header-layout>
       <paper-dialog id="nav" class="nav-dialog" entry-animation="fade-in-animation" exit-animation="fade-out-animation" with-backdrop>
         <h2>Custom Size &amp; Position</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
