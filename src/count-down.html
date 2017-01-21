@@ -15,26 +15,49 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <template>
     <style include="shared-styles">
       :host {
+        background-color: var(--app-secondary-color);
         display: block;
+        padding: var(--module-padding);
+        text-align: center;
+      }
+      img {
+        height: 60px;
+        padding: 15px;
+        width: 60px;
+      }
+      .timer {
+        color: var(--app-color-white);
+        display: flex;
+        margin: 0 auto;
+        max-width: 400px;
+        justify-content: space-around;
+      }
+
+      .timer .component {
+        display: flex;
+        flex-direction: column;
       }
     </style>
 
-    <section>
-      <h4>[[days]]</h4>
-      <h5>Days</h5>
-    </section>
-    <section>
-      <h4>[[hours]]</h4>
-      <h5>Hours</h5>
-    </section>
-    <section>
-      <h4>[[minutes]]</h4>
-      <h5>Minutes</h5>
-    </section>
-    <section>
-      <h4>[[seconds]]</h4>
-      <h5>Seconds</h5>
-    </section>
+    <img src="/images/ico-bride-groom.svg">
+    <div class="timer">
+      <section class="component">
+        <span class="value">[[days]]</span>
+        <span class="unit">Days</span>
+      </section>
+      <section class="component">
+        <span class="value">[[hours]]</span>
+        <span class="unit">Hours</span>
+      </section>
+      <section class="component">
+        <span class="value">[[minutes]]</span>
+        <span class="unit">Minutes</span>
+      </section>
+      <section class="component">
+        <span class="value">[[seconds]]</span>
+        <span class="unit">Seconds</span>
+      </section>
+    </div>
   </template>
 
   <script>

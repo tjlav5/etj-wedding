@@ -17,19 +17,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <template>
     <style include="app-grid-style shared-styles">
       :host {
+        background: url('/images/pattern-background.svg') repeat;
         display: block;
+        padding: var(--module-padding);
         --app-grid-columns: 2;
-        --app-grid-gutter: 10px;
+        --app-grid-gutter: 20px;
       }
 
       ul {
         padding: 0;
+        margin: 0 auto;
+        max-width: 1024px;
         list-style: none;
+      }
+
+      .item {
+        text-align: center;
       }
 
       paper-card {
         --paper-card: {
           box-shadow: none !important;
+        }
+        --paper-card-header: {
+          padding: 20px !important;
         }
       }
 
@@ -46,17 +57,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <li class="item">
         <paper-card heading="Erika" image="images/img-erika.jpg">
           <div class="card-content">Hey hey hey!</div>
-          <div class="card-actions">
-            <paper-button>TODO: arrow icon</paper-button>
-          </div>
         </paper-card>
       </li>
       <li class="item">
         <paper-card heading="TJ" image="images/img-tj.jpg">
           <div class="card-content">Hey hey hey!</div>
-          <div class="card-actions">
-            <paper-button>TODO: arrow icon</paper-button>
-          </div>
         </paper-card>
       </li>
     </ul>

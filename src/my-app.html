@@ -12,6 +12,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../bower_components/app-route/app-location.html">
@@ -28,13 +29,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="count-down.html">
 <link rel="import" href="map-accommodations.html">
 <link rel="import" href="my-icons.html">
+<link rel="import" href="shared-styles.html">
 
 <dom-module id="my-app">
   <template>
-    <style>
+    <style include="shared-styles">
       :host {
-        --app-primary-color: #222;
-        --app-secondary-color: #666;
+        /*--app-primary-color: #0f0f0f;*/
+        /*--app-secondary-color: #666;*/
 
         display: block;
       }
@@ -58,6 +60,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         overflow: auto;
       }
 
+      .hero {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        overflow: hidden
+      }
+
+      .hero img {
+        background-color: var(--app-primary-color);
+        flex-shrink: 0;
+        min-width: 100%;
+        min-height: 100%
+      }
+
       video {
         width: 100%;
       }
@@ -72,20 +88,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         tail="{{subroute}}"></app-route>
 
       <!-- Main content -->
+      <app-header-layout>
         <app-header fixed>
           <app-toolbar>
             <h4 main-title>#ETJ</h4>
             <paper-icon-button icon="icons:menu" on-click="openNav"></paper-icon-button>
           </app-toolbar>
         </app-header>
-
-        <iron-auto-scroll-spy selected="{{scrollSelected}}" id="autoScrollSpy">
-          <video src="/images/Wedding-Video-2-bw.mp4" autostart autoplay loop="true" muted="true"></video>
+        <div>
+        <!-- <iron-auto-scroll-spy selected="{{scrollSelected}}" id="autoScrollSpy"> -->
+          <section class="hero">
+            <img src="/images/etj-logo.svg" />
+          </section>
+          <!-- <video src="/images/Wedding-Video-2-bw.mp4" autostart autoplay loop="true" muted="true"></video> -->
           <count-down></count-down>
           <bride-and-groom></bride-and-groom>
           <map-accommodations></map-accommodations>
-        </iron-auto-scroll-spy>
-
+        <!-- </iron-auto-scroll-spy> -->
+        </div>
+      </app-header-layout>
       <paper-dialog id="nav" class="nav-dialog" entry-animation="fade-in-animation" exit-animation="fade-out-animation" with-backdrop>
         <h2>Custom Size &amp; Position</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
