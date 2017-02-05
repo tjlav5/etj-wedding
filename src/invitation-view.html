@@ -1,0 +1,58 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="bride-and-groom.html">
+<link rel="import" href="calendar-event.html">
+<link rel="import" href="count-down.html">
+<link rel="import" href="map-accommodations.html">
+<link rel="import" href="my-icons.html">
+<link rel="import" href="rsvp-form.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="invitation-view">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+
+      .hero {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        overflow: hidden
+      }
+
+      .hero img {
+        background-color: var(--app-primary-color);
+        flex-shrink: 0;
+        min-width: 100%;
+        min-height: 100%
+      }
+    </style>
+
+    <section class="hero">
+      <img src="/images/etj-logo.svg" />
+    </section>
+    <!-- <video src="/images/Wedding-Video-2-bw.mp4" autostart autoplay loop="true" muted="true"></video> -->
+    <count-down></count-down>
+    <bride-and-groom></bride-and-groom>
+    <calendar-event></calendar-event>
+    <map-accommodations></map-accommodations>
+    <rsvp-form></rsvp-form>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'invitation-view',
+    });
+  </script>
+</dom-module>
