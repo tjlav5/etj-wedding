@@ -20,23 +20,37 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <template>
     <style include="shared-styles">
       :host {
+        background: url('/images/pattern-background.svg') repeat;
         display: block;
-
         padding: 10px;
       }
+
+      section {
+        background-color: white;
+        margin: 0 auto;
+        max-width: calc(1024px / 2);
+        padding: 10px;
+      }
+
+      form {}
     </style>
 
-
+    <section>
+      <img src="/images/ico-ring.svg" />
+      <p>We are super excited to be celebrating with you!</p>
+      <p>Please R.S.V.P. by <b>Satruday, June 24<sup>th</sup>, 2017</b>.</p>
+      <h1>R.S.V.P.</h1>
       <form is="iron-form" id="rsvpForm">
         <paper-input name="name" label="Your Name" required></paper-input>
         <paper-input name="email" label="Your Email" required></paper-input>
         <paper-input name="guest" label="Guests Name - if bringing one"></paper-input>
-        <paper-checkbox name="brunch">Yes, I/we can swing it and will be joinging you for brunch</paper-checkbox>
-        <paper-textarea name="message" label="Message" rows="3" value=""></paper-textarea>
+        <paper-checkbox name="brunch">Yes, I/we can swing it and will be joining you for brunch</paper-checkbox>
+        <paper-textarea name="message" label="Message" value=""></paper-textarea>
         <paper-button raised on-tap="submitYes">YES I'M COMING</paper-button>
         <paper-button raised on-tap="submitNo">CANNOT ATTEND :(</paper-button>
         <input type="hidden" name="isAttending" id="isAttending">
       </form>
+    </section>
   </template>
 
   <script>
