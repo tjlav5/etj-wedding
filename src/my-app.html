@@ -25,10 +25,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/neon-animation/animations/fade-in-animation.html">
 <link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../third_party/firebase-app.html">
 <link rel="import" href="bride-and-groom.html">
+<link rel="import" href="calendar-event.html">
 <link rel="import" href="count-down.html">
 <link rel="import" href="map-accommodations.html">
 <link rel="import" href="my-icons.html">
+<link rel="import" href="rsvp-form.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="my-app">
@@ -103,7 +106,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <!-- <video src="/images/Wedding-Video-2-bw.mp4" autostart autoplay loop="true" muted="true"></video> -->
           <count-down></count-down>
           <bride-and-groom></bride-and-groom>
+          <calendar-event></calendar-event>
           <map-accommodations></map-accommodations>
+          <rsvp-form></rsvp-form>
         <!-- </iron-auto-scroll-spy> -->
         </div>
       </app-header-layout>
@@ -119,6 +124,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       is: 'my-app',
       openNav: function() {
         this.$.nav.open();
+      },
+      created: function() {
+        const config = {
+          apiKey: "AIzaSyBkj9JRnEfGhkQd2eUBCe8co4XpcV0eQX4",
+          authDomain: "etj-wedding.firebaseapp.com",
+          databaseURL: "https://etj-wedding.firebaseio.com",
+        };
+        firebase.initializeApp(config);
       }
     });
   </script>

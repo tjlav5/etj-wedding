@@ -1,0 +1,114 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/app-layout/app-grid/app-grid-style.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="calendar-event">
+  <template>
+    <style include="app-grid-style shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+        text-align: center;
+        --app-grid-columns: 3;
+        --app-grid-gutter: 20px;
+      }
+
+      .date, .location {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .date {
+        color: var(--app-tertiary-color);
+      }
+
+      img {
+        height: 100px;
+      }
+
+      .app-grid {
+        margin: 0 auto;
+        max-width: 420px;
+      }
+
+      p {
+        margin: 0 auto;
+        max-width: 520px;
+      }
+
+      .calendar-button {
+        --paper-button: {
+          border: 3px solid var(--app-tertiary-color);
+          border-radius: 0;
+          color: var(--app-primary-color);
+          text-decoration: none;
+        }
+      }
+
+      paper-button:hover {
+        background: var(--app-tertiary-color);
+      }
+
+      @media (max-width: 419px) {
+        :host {
+          --app-grid-columns: 1;
+          --app-grid-gutter: 5px;
+        }
+      }
+    </style>
+
+    <div class="date">
+      <span>Saturday</span><span>07.22.2017</span>
+    </div>
+    <div class="location">
+      <span>Metropolitan Building</span>
+      <span>2nd Floor</span>
+      <span>44-01 11th St, Long Island City, NY</span>
+    </div>
+
+    <div class="events app-grid">
+      <div><img src="/images/ico-ring.svg"><div>Ceremony</div></div>
+      <div><img src="/images/ico-cocktail.svg"><div>Cocktails</div></div>
+      <div><img src="/images/ico-cupcake.svg"><div>Reception</div></div>
+    </div>
+
+    <a href="https://www.polymer-project.org/" tabindex="-1">
+      <paper-button class="calendar-button" elevation="0" noink><span>Add to Calendar</span></paper-button>
+    </a>
+
+    <div class="date">
+      Sunday 07.23.2017
+    </div>
+
+    <p>Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p>
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'calendar-event',
+      attached: function() {
+        this._updateGridStyles = this._updateGridStyles || function() {
+          this.updateStyles();
+        }.bind(this);
+        window.addEventListener('resize', this._updateGridStyles);
+      },
+
+      detached: function() {
+        window.removeEventListener('resize', this._updateGridStyles);
+      }
+    });
+  </script>
+</dom-module>

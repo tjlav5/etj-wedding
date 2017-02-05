@@ -1,0 +1,77 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-input/paper-textarea.html">
+<link rel="import" href="../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../third_party/firebase-database.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="rsvp-form">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+    </style>
+
+
+      <form is="iron-form" id="rsvpForm">
+        <paper-input name="name" label="Your Name" required></paper-input>
+        <paper-input name="email" label="Your Email" required></paper-input>
+        <paper-input name="guest" label="Guests Name - if bringing one"></paper-input>
+        <paper-checkbox name="brunch">Yes, I/we can swing it and will be joinging you for brunch</paper-checkbox>
+        <paper-textarea name="message" label="Message" rows="3" value=""></paper-textarea>
+        <paper-button raised on-tap="submitYes">YES I'M COMING</paper-button>
+        <paper-button raised on-tap="submitNo">CANNOT ATTEND :(</paper-button>
+        <input type="hidden" name="isAttending" id="isAttending">
+      </form>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'rsvp-form',
+      ready: function() {
+        var form = this.$.rsvpForm;
+        form.addEventListener('iron-form-presubmit', function(event) {
+          event.preventDefault();
+          console.log(form);
+          var reservation = form.serialize();
+          // reservation.
+          firebase.database().ref('rsvps/' + reservation.isAttending + '/' + reservation.name).set(reservation)
+              .then((foo) => alert('RSVP confirmed'))
+              .catch((err) => console.error(err));
+        });
+        // firebase.database().ref('rsvps/' + 'abc123').set({
+        //   username: 'abc123',
+        //   email: '@google.com',
+        //   profile_picture : 'base64://pretty/sexy'
+        // }).then((foo) => console.log('foo', foo)).catch((err) => console.error(err));
+      },
+      submitForm_: function() {
+        if (this.$.rsvpForm.validate()) {
+          this.$.rsvpForm.submit();
+        }
+      },
+      submitYes: function() {
+        this.$.isAttending.value = 'yes';
+        this.submitForm_();
+      },
+      submitNo: function() {
+        this.$.isAttending.value = 'no';
+        this.submitForm_();
+      }
+    });
+  </script>
+</dom-module>
