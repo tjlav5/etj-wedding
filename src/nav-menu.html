@@ -9,36 +9,49 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="bride-and-groom.html">
-<link rel="import" href="calendar-event.html">
-<link rel="import" href="count-down.html">
-<link rel="import" href="map-accommodations.html">
-<link rel="import" href="my-icons.html">
-<link rel="import" href="rsvp-form.html">
+<link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
 <link rel="import" href="shared-styles.html">
 
-<dom-module id="invitation-view">
+<dom-module id="nav-menu">
   <template>
     <style include="shared-styles">
       :host {
+        background-color: transparent;
         display: block;
+      }
+
+      ul {
+        display: flex;
+        flex-direction: column;
+      }
+
+      @media (min-width: 600px) {
+        ul {
+          flex-direction: row;
+        }
       }
     </style>
 
-    <!--<section class="hero">
-      <img src="/images/etj-logo.svg" />
-    </section>-->
-    <!-- <video src="/images/Wedding-Video-2-bw.mp4" autostart autoplay loop="true" muted="true"></video> -->
-    <count-down></count-down>
-    <bride-and-groom></bride-and-groom>
-    <calendar-event></calendar-event>
-    <map-accommodations></map-accommodations>
-    <rsvp-form></rsvp-form>
+    <iron-media-query query="(min-width:600px)" query-matches="{{isDesktop}}"></iron-media-query>
+
+    <ul>
+      <li>Foo</li>
+      <li>Foo</li>
+      <li>Foo</li>
+      <li>Foo</li>
+    </ul>
+
   </template>
 
   <script>
     Polymer({
-      is: 'invitation-view',
+      is: 'nav-menu',
+      observers: [
+        '_isDesktopChanged(isDesktop)'
+      ],
+      _isDesktopChanged: function(param) {
+        this.updateStyles();
+      }
     });
   </script>
 </dom-module>

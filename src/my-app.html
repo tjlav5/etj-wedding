@@ -17,7 +17,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../bower_components/app-route/app-location.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-scroll-spy/iron-auto-scroll-spy.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
@@ -26,25 +28,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../third_party/firebase-app.html">
+<link rel="import" href="nav-menu.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="my-app">
   <template>
-    <style include="shared-styles">
+    <style include="iron-flex shared-styles">
       :host {
-        /*--app-primary-color: #0f0f0f;*/
-        /*--app-secondary-color: #666;*/
-
         display: block;
       }
 
       app-header {
-        @apply(--layout-fixed-top);
-        color: #fff;
-        background-color: var(--app-primary-color);
-        z-index: 10;
+        color: var(--app-color-white);
+        background-color: var(--app-color-black);
+        --app-header-background-front-layer: {
+          background-image: url('/images/etj-logo.svg');
+          background-position: 50% 30%;
+        };
         --app-header-background-rear-layer: {
-          background-color: #ef6c00;
         }
       }
 
@@ -57,13 +58,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         overflow: auto;
       }
 
-
-
-      video {
-        width: 100%;
+      app-toolbar paper-icon-button {
+        display: none;
       }
 
     </style>
+    
+    <iron-media-query query="(min-width:600px)" query-matches="{{isDesktop}}"></iron-media-query>
 
     <app-location route="{{route}}"></app-location>
     <app-route
@@ -74,10 +75,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       <!-- Main content -->
       <app-header-layout>
-        <app-header fixed>
-          <app-toolbar>
+        <app-header fixed condenses effects="blend-background parallax-background waterfall">
+          <!--<app-toolbar>
             <h4 main-title>#ETJ</h4>
             <paper-icon-button icon="icons:menu" on-click="openNav"></paper-icon-button>
+            <span class="layout horizontal">
+              <h5>Bar</h5>
+              <h5>Foo</h5>
+              <h5>Foo</h5>
+              <h5>Foo</h5>
+            </span>
+          </app-toolbar>-->
+          <!--<app-toolbar>
+            <h4 condensed-title style="color:black;">#ETJ</h4>
+            <paper-icon-button icon="app:menu" drawer-toggle=""></paper-icon-button>
+          </app-toolbar>-->
+          <app-toolbar></app-toolbar>
+          <app-toolbar></app-toolbar>
+          <app-toolbar></app-toolbar>
+          <app-toolbar>
+            <h4 main-title>#ETJ</h4>
+            <nav-menu></nav-menu>
+            <paper-icon-button icon="icons:menu" on-click="openNav"></paper-icon-button>
+            <!--<div title="" spacer="">Test Drive</div>-->
           </app-toolbar>
         </app-header>
         <iron-pages
@@ -86,27 +106,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             fallback-selection="view404"
             role="main">
           <invitation-view name="invitation"></invitation-view>
-          <my-view1 name="view1"></my-view1>
-          <my-view2 name="view2"></my-view2>
-          <my-view3 name="view3"></my-view3>
           <my-view404 name="view404"></my-view404>
         </iron-pages>
-        <!-- <div>
-          <section class="hero">
-            <img src="/images/etj-logo.svg" />
-          </section>
-          <video src="/images/Wedding-Video-2-bw.mp4" autostart autoplay loop="true" muted="true"></video>
-          <count-down></count-down>
-          <bride-and-groom></bride-and-groom>
-          <calendar-event></calendar-event>
-          <map-accommodations></map-accommodations>
-          <rsvp-form></rsvp-form>
-        </div> -->
       </app-header-layout>
+
+      <!-- Navigation -->
       <paper-dialog id="nav" class="nav-dialog" entry-animation="fade-in-animation" exit-animation="fade-out-animation" with-backdrop>
-        <h2>Custom Size &amp; Position</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-          dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <nav-menu></nav-menu>
       </paper-dialog>
   </template>
 
@@ -133,6 +139,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
       observers: [
         '_routePageChanged(routeData.page)',
+        '_isDesktopChanged(isDesktop)'
       ],
       _routePageChanged: function(page) {
         this.page = page || 'invitation';
@@ -148,6 +155,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       _showPage404: function() {
         this.page = '404';
       },
+      _isDesktopChanged: function(param) {
+        this.updateStyles();
+      }
     });
   </script>
 </dom-module>
