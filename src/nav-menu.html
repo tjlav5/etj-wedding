@@ -35,10 +35,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <iron-media-query query="(min-width:600px)" query-matches="{{isDesktop}}"></iron-media-query>
 
     <ul>
-      <li>Foo</li>
-      <li>Foo</li>
-      <li>Foo</li>
-      <li>Foo</li>
+      <li>
+        <a on-click="goTo">Details</a>
+      </li>
+      <li>Accomodations</li>
+      <li>R.S.V.P.</li>
+      <li>Registry</li>
     </ul>
 
   </template>
@@ -51,6 +53,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       ],
       _isDesktopChanged: function(param) {
         this.updateStyles();
+      },
+      goTo: function() {
+        console.log(arguments);
+        var target = this.parentElement.dataHost.querySelector('count-down');
+        target.scrollIntoView();
       }
     });
   </script>
